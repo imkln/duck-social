@@ -1,0 +1,12 @@
+opam-version: "2.0"
+depends: [
+  "dune" {build}
+  "dream"
+  "cohttp-lwt-unix"
+  "lwt"
+  "yojson"
+  "ptime"
+]
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]

@@ -1,0 +1,16 @@
+#trending {
+  background: #222;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 16px;
+
+  h3 {
+    margin-top: 0;
+  }
+
+  .trending-item {
+    padding: 8px 0;
+    cursor: pointer;
+    color: #999;
+  }
+}

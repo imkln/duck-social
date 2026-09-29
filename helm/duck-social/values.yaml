@@ -1,0 +1,51 @@
+services:
+  frontend:
+    containerPort: 80
+    ingress:
+      enabled: true
+      path: /
+
+  user-service:
+    containerPort: 8080
+    ingress:
+      enabled: true
+      path: /users
+    env:
+      S3_BUCKET: duck-social-images
+      AWS_REGION: us-east-1
+
+  post-service:
+    containerPort: 8080
+    ingress:
+      enabled: true
+      path: /posts
+    env:
+      S3_BUCKET: duck-social-images
+      AWS_REGION: us-east-1
+
+  feed-service:
+    containerPort: 8080
+    ingress:
+      enabled: true
+      path: /feed
+    env:
+      POST_SERVICE_URL: http://post-service
+      USER_SERVICE_URL: http://user-service
+      AD_SERVICE_URL: http://ad-service
+
+  ad-service:
+    containerPort: 8080
+    ingress:
+      enabled: true
+      path: /ads
+    env:
+      S3_BUCKET: duck-social-images
+      AWS_REGION: us-east-1
+
+  trending-service:
+    containerPort: 8080
+    ingress:
+      enabled: true
+      path: /trending
+    env:
+      POST_SERVICE_URL: http://post-service

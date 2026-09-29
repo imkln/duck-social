@@ -1,0 +1,33 @@
+#profile {
+  background: #222;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 16px;
+
+  img {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 12px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  div {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+
+    span {
+      color: #999;
+    }
+  }
+
+  p {
+    line-height: 1.5;
+  }
+
+  .profile-stats {
+    display: flex;
+    gap: 12px;
+  }
+}
