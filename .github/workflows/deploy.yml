@@ -135,5 +135,14 @@ jobs:
       - name: Update kubeconfig
         run: aws eks update-kubeconfig --region "$AWS_REGION" --name "$EKS_CLUSTER_NAME"
 
-      - name: Helm uninstall
-        run: helm uninstall ${{ env.HELM_RELEASE_NAME }}
+      - name: Helm uninstall application
+        run: |
+          helm uninstall "$HELM_APPLICATION_NAME" \
+            --namespace default \
+            --ignore-not-found
+
+      - name: Helm uninstall observability
+        run: |
+          helm uninstall "$HELM_OBSERVABILITY_NAME" \
+            --namespace observability \
+            --ignore-not-found
