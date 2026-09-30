@@ -4,6 +4,12 @@ description: Observability stack for Duck Social
 type: application
 version: 0.1.0
 dependencies:
+  - name: alloy
+    version: "1.13.0"
+    repository: "https://grafana.github.io/helm-charts"
   - name: kube-prometheus-stack
     version: "91.4.1"
     repository: "oci://ghcr.io/prometheus-community/charts"
+  - name: loki
+    version: "18.13.7"
+    repository: "oci://ghcr.io/grafana-community/helm-charts"
