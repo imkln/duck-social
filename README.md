@@ -1,6 +1,6 @@
 # Duck Social
 
-A social network for ducks built with microservices to learn Kubernetes, inspired by [Google Cloud Platform's microservices-demo](https://github.com/googlecloudplatform/microservices-demo). The project focuses on implementing deployments strategies, scalability, and observability in Kubernetes on AWS.
+A social network for ducks built with microservices to learn Kubernetes, inspired by [Google Cloud Platform's microservices-demo](https://github.com/googlecloudplatform/microservices-demo). The project focuses on implementing deployment strategies, scalability, and observability in Kubernetes on AWS.
 
 ## Components
 
