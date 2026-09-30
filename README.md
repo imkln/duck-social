@@ -1,5 +1,7 @@
 # Duck Social
 
+![Website](images/website.png)
+
 A social network for ducks built with microservices to learn Kubernetes, inspired by [Google Cloud Platform's microservices-demo](https://github.com/googlecloudplatform/microservices-demo). The project focuses on implementing deployment strategies, scalability, and observability in Kubernetes on AWS.
 
 ## Components
@@ -35,4 +37,5 @@ This is a personal learning project and is not intended to be production-ready o
 
 - Application data is stored in memory and is lost when pods restart.
 - Authentication and authorization are not implemented.
+- Application code is not the primary focus of this project.
 - Contributions and feature requests are not being accepted.

@@ -9,7 +9,7 @@ class TrafficUser(HttpUser):
 
     def on_start(self):
         identifier = uuid.uuid4().hex
-        response = self.client.post("/users", json={
+        response = self.client.post("/users", data={
             "username": f"Traffic Duck {identifier}",
             "handle": f"@trafficduck{identifier}",
             "bio": "Just here to make traffic"
