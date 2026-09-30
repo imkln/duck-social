@@ -3,4 +3,4 @@ dependencies:
   repository: oci://ghcr.io/prometheus-community/charts
   version: 91.4.1
 digest: sha256:bf7af00f5a4577e8fb9378e57ee3bc80fc1c4e58bbf82bfc6c51bb6060074f53
-generated: "2026-09-20T17:19:26.718792-05:00"
+generated: "2026-09-30T10:02:30.124548-05:00"

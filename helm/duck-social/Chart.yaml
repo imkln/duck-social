@@ -3,7 +3,3 @@ name: duck-social
 description: A social network for ducks built with microservices to learn Kubernetes
 type: application
 version: 0.1.0
-dependencies:
-  - name: kube-prometheus-stack
-    version: "91.4.1"
-    repository: "oci://ghcr.io/prometheus-community/charts"
