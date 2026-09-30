@@ -16,7 +16,7 @@ async function loadProfile() {
   const postCount = await postCountResponse.json();
 
   profile.innerHTML = `
-    <img src="${user.profile_picture_url || "/images/avatar.jpg"}">
+    <img src="${user.profile_picture_url || "/images/avatar.png"}">
 
     <div>
       <strong>${user.username}</strong>

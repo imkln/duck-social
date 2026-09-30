@@ -66,7 +66,7 @@ export async function loadFeed(hashtag = searchInput.value.trim()) {
   }).join("");
 }
 
-async function toggleLike(button, postId) {
+window.toggleLike = async function toggleLike(button, postId) {
   const liked = button.classList.contains("liked");
 
   const response = await fetch(`/posts/${postId}/like`, {

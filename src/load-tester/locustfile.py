@@ -9,11 +9,10 @@ class TrafficUser(HttpUser):
 
     def on_start(self):
         identifier = uuid.uuid4().hex
-        response = self.client.post("/users", json={
+        response = self.client.post("/users", data={
             "username": f"Traffic Duck {identifier}",
             "handle": f"@trafficduck{identifier}",
-            "profile_picture": "/assets/avatar.jpg",
-            "bio": "Just here to make traffic",
+            "bio": "Just here to make traffic"
         })
         if not response.ok:
             raise RuntimeError(f"Failed to create traffic user: {response.status_code} {response.text}")
