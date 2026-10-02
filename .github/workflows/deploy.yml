@@ -26,7 +26,8 @@ env:
   ECR_REGISTRY: ${{ vars.ECR_REGISTRY }}
   ECR_REPOSITORY: ${{ vars.ECR_REPOSITORY }}
   EKS_CLUSTER_NAME: ${{ vars.EKS_CLUSTER_NAME }}
-  HELM_RELEASE_NAME: ${{ vars.HELM_RELEASE_NAME }}
+  HELM_APPLICATION_NAME: ${{ vars.HELM_APPLICATION_NAME }}
+  HELM_OBSERVABILITY_NAME: ${{ vars.HELM_OBSERVABILITY_NAME }}
   IMAGE_TAG: ${{ github.sha }}
 
 jobs:
@@ -91,13 +92,25 @@ jobs:
         run: aws eks update-kubeconfig --region "$AWS_REGION" --name "$EKS_CLUSTER_NAME"
 
       - name: Build Helm dependencies
-        run: helm dependency build ./helm/duck-social
-
-      - name: Helm upgrade
         run: |
-          helm upgrade --install ${{ env.HELM_RELEASE_NAME }} ./helm/duck-social \
+            helm dependency build ./helm/$HELM_APPLICATION_NAME
+            helm dependency build ./helm/$HELM_OBSERVABILITY_NAME
+
+      - name: Helm upgrade application
+        run: |
+          helm upgrade --install "$HELM_APPLICATION_NAME" "./helm/$HELM_APPLICATION_NAME" \
+            --namespace default \
             --set "image.repository=$ECR_REGISTRY/$ECR_REPOSITORY" \
             --set "image.tag=$IMAGE_TAG" \
+            --wait \
+            --timeout 10m \
+            --rollback-on-failure
+
+      - name: Helm upgrade observability
+        run: |
+          helm upgrade --install "$HELM_OBSERVABILITY_NAME" "./helm/$HELM_OBSERVABILITY_NAME" \
+            --namespace observability \
+            --create-namespace \
             --wait \
             --timeout 10m \
             --rollback-on-failure
@@ -122,5 +135,14 @@ jobs:
       - name: Update kubeconfig
         run: aws eks update-kubeconfig --region "$AWS_REGION" --name "$EKS_CLUSTER_NAME"
 
-      - name: Helm uninstall
-        run: helm uninstall ${{ env.HELM_RELEASE_NAME }}
+      - name: Helm uninstall application
+        run: |
+          helm uninstall "$HELM_APPLICATION_NAME" \
+            --namespace default \
+            --ignore-not-found
+
+      - name: Helm uninstall observability
+        run: |
+          helm uninstall "$HELM_OBSERVABILITY_NAME" \
+            --namespace observability \
+            --ignore-not-found

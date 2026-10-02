@@ -1,0 +1,63 @@
+alloy:
+  alloy:
+    configMap:
+      content: |-
+        discovery.kubernetes "pods" {
+          role = "pod"
+
+          namespaces {
+            names = ["default"]
+          }
+        }
+
+        loki.source.kubernetes "pods" {
+          targets    = discovery.kubernetes.pods.targets
+          forward_to = [loki.write.default.receiver]
+        }
+
+        loki.write "default" {
+          endpoint {
+            url = "http://observability-loki-gateway/loki/api/v1/push"
+          }
+        }
+
+kube-prometheus-stack:
+  alertmanager:
+    enabled: false
+
+  grafana:
+    additionalDataSources:
+      - name: Loki
+        type: loki
+        url: http://observability-loki-gateway
+        access: proxy
+
+loki:
+  loki:
+    auth_enabled: false
+    useTestSchema: true
+    commonConfig:
+      replication_factor: 1
+    storage:
+      type: filesystem
+
+  singleBinary:
+    replicas: 1
+    persistence:
+      enabled: false
+
+  write:
+    replicas: 0
+  read:
+    replicas: 0
+  backend:
+    replicas: 0
+
+  test:
+    enabled: false
+  lokiCanary:
+    enabled: false
+  chunksCache:
+    enabled: false
+  resultsCache:
+    enabled: false
