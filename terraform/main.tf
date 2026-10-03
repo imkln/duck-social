@@ -29,6 +29,7 @@ module "eks" {
   addons = {
     eks-pod-identity-agent = {}
     kube-proxy             = {}
+    metrics-server         = {}
     vpc-cni = {
       before_compute = true
     }

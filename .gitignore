@@ -10,3 +10,6 @@ charts/
 # Ruby
 .bundle/
 vendor/
+
+# Python
+__pycache__/

@@ -1,6 +1,8 @@
 services:
   frontend:
     containerPort: 80
+    autoscaling:
+      enabled: false
     resources:
       requests:
         cpu: 50m
@@ -14,6 +16,8 @@ services:
 
   user-service:
     containerPort: 8080
+    autoscaling:
+      enabled: false
     resources:
       requests:
         cpu: 100m
@@ -30,6 +34,8 @@ services:
 
   post-service:
     containerPort: 8080
+    autoscaling:
+      enabled: false
     resources:
       requests:
         cpu: 100m
@@ -46,6 +52,10 @@ services:
 
   feed-service:
     containerPort: 8080
+    autoscaling:
+      enabled: true
+      minReplicas: 1
+      maxReplicas: 3
     resources:
       requests:
         cpu: 100m
@@ -63,6 +73,8 @@ services:
 
   ad-service:
     containerPort: 8080
+    autoscaling:
+      enabled: false
     resources:
       requests:
         cpu: 100m
@@ -79,6 +91,8 @@ services:
 
   trending-service:
     containerPort: 8080
+    autoscaling:
+      enabled: false
     resources:
       requests:
         cpu: 100m
