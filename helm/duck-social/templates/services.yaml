@@ -10,7 +10,9 @@ kind: Deployment
 metadata:
   name: {{ $name }}
 spec:
+  {{- if not $service.autoscaling.enabled }}
   replicas: 1
+  {{- end }}
   selector:
     matchLabels:
       app.kubernetes.io/name: {{ $name }}
@@ -25,6 +27,13 @@ spec:
           image: {{ $.Values.image.repository }}:{{ $name }}-{{ $.Values.image.tag }}
           ports:
             - containerPort: {{ $service.containerPort }}
+          resources:
+            requests:
+              cpu: {{ $service.resources.requests.cpu }}
+              memory: {{ $service.resources.requests.memory }}
+            limits:
+              cpu: {{ $service.resources.limits.cpu }}
+              memory: {{ $service.resources.limits.memory }}
           {{- with $service.env }}
           env:
             {{- range $key, $value := . }}
@@ -44,4 +53,25 @@ spec:
     - port: 80
       targetPort: {{ $service.containerPort }}
   type: ClusterIP
+{{- if $service.autoscaling.enabled }}
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: {{ $name }}
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: {{ $name }}
+  minReplicas: {{ $service.autoscaling.minReplicas }}
+  maxReplicas: {{ $service.autoscaling.maxReplicas }}
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 60
+{{- end }}
 {{- end }}
