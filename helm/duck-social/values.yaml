@@ -1,12 +1,26 @@
 services:
   frontend:
     containerPort: 80
+    resources:
+      requests:
+        cpu: 50m
+        memory: 32Mi
+      limits:
+        cpu: 250m
+        memory: 128Mi
     ingress:
       enabled: true
       path: /
 
   user-service:
     containerPort: 8080
+    resources:
+      requests:
+        cpu: 100m
+        memory: 128Mi
+      limits:
+        cpu: 500m
+        memory: 256Mi
     ingress:
       enabled: true
       path: /users
@@ -16,6 +30,13 @@ services:
 
   post-service:
     containerPort: 8080
+    resources:
+      requests:
+        cpu: 100m
+        memory: 256Mi
+      limits:
+        cpu: 500m
+        memory: 512Mi
     ingress:
       enabled: true
       path: /posts
@@ -25,6 +46,13 @@ services:
 
   feed-service:
     containerPort: 8080
+    resources:
+      requests:
+        cpu: 100m
+        memory: 128Mi
+      limits:
+        cpu: 1000m
+        memory: 512Mi
     ingress:
       enabled: true
       path: /feed
@@ -35,6 +63,13 @@ services:
 
   ad-service:
     containerPort: 8080
+    resources:
+      requests:
+        cpu: 100m
+        memory: 64Mi
+      limits:
+        cpu: 500m
+        memory: 256Mi
     ingress:
       enabled: true
       path: /ads
@@ -44,6 +79,13 @@ services:
 
   trending-service:
     containerPort: 8080
+    resources:
+      requests:
+        cpu: 100m
+        memory: 128Mi
+      limits:
+        cpu: 1000m
+        memory: 512Mi
     ingress:
       enabled: true
       path: /trending

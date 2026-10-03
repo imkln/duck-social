@@ -25,6 +25,13 @@ spec:
           image: {{ $.Values.image.repository }}:{{ $name }}-{{ $.Values.image.tag }}
           ports:
             - containerPort: {{ $service.containerPort }}
+          resources:
+            requests:
+              cpu: {{ $service.resources.requests.cpu }}
+              memory: {{ $service.resources.requests.memory }}
+            limits:
+              cpu: {{ $service.resources.limits.cpu }}
+              memory: {{ $service.resources.limits.memory }}
           {{- with $service.env }}
           env:
             {{- range $key, $value := . }}
