@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-duck-social-dashboard
+  labels:
+    grafana_dashboard: "1"
+data:
+  duck-social.json: |-
+{{ .Files.Get "dashboards/duck-social.json" | indent 4 }}

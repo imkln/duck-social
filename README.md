@@ -29,7 +29,9 @@ Infrastructure is provisioned with Terraform and deployed to Kubernetes using He
 
 ## Observability
 
-Application metrics, centralized logging, and dashboards are planned.
+Prometheus collects cluster and application metrics and Alloy sends application logs to Loki. Grafana provides a dashboard to view the metrics and logs.
+
+![Observability](images/observability.png)
 
 ## Limitations
 
