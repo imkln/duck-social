@@ -94,6 +94,7 @@ jobs:
 
       - name: Build Helm dependencies
         run: |
+          helm repo add grafana https://grafana.github.io/helm-charts
           helm dependency build "./helm/$HELM_APPLICATION_NAME"
           helm dependency build "./helm/$HELM_OBSERVABILITY_NAME"
 
